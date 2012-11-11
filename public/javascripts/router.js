@@ -4,7 +4,8 @@ iNeedHelp.routing = Backbone.Router.extend({
 		'gmap' : 'gmap',
 		'thankyYouForOffer': 'thankyYouForOffer',
 		'askHelp': 'askHelp',
-		'listenForOffer':'listenForOffer'
+		'listenForOffer':'listenForOffer',
+		'offerHelp':'offerHelp'
 	},
 
 	page: function (page) {
@@ -37,5 +38,9 @@ iNeedHelp.routing = Backbone.Router.extend({
 	listenForOffer: function(){
 		iNeedHelp.views['listenForOffer'] = new iNeedHelp.Views['listenForOffer'];
 		iNeedHelp.views['listenForOffer'].render();
+	},
+	offerHelp: function(){
+		iNeedHelp.views['offerHelp'] = new iNeedHelp.Views['offerHelp'];
+		iNeedHelp.views['offerHelp'].render();
 	}
 });

@@ -98,3 +98,16 @@ iNeedHelp.Views['marker'] = Backbone.View.extend({
 			});
 		}
 });
+
+iNeedHelp.Views['offerHelp'] = iNeedHelp.Views['basePageView'].extend({
+
+	events: {
+		// "click .sort-button": "toggleSortable"
+	},
+
+	template: _.template($('#offerHelp-tpl').html())
+
+	// afterRender: function () {
+	// 	// do smt
+	// }
+});
