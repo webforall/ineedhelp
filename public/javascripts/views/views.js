@@ -67,16 +67,16 @@ iNeedHelp.Views['thankyYouForOffer'] = iNeedHelp.Views['basePageView'].extend({
 iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
 
 	events: {
-		"click #askHelp": "aksForHelp"
+		"click #askHelp": "askForHelp"
 		// "click .sort-button": "toggleSortable"
 	},
 
-	template: _.template($('#askHelp-tpl').html())
+	template: _.template($('#askHelp-tpl').html()),
 
 	// afterRender: function () {
 	// 	// do smt
 	// }
-	aksForHelp: function () {
+	askForHelp: function () {
 		now.askForHelp($("#askHelpForm").find('input').val());
 		return false;
 	}
