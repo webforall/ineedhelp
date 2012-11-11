@@ -13,9 +13,9 @@ iNeedHelp.Views['basePageView'] = Backbone.View.extend({
 	render: function () {
 		this.$el.html(this.template(iNeedHelp.models.Config.toJSON()));
 
-		// if (this.afterRender !== undefined) {
-		// 	this.afterRender();
-		// }
+		if (this.afterRender !== undefined) {
+			this.afterRender();
+		}
 
 		return this;
 	}
@@ -44,11 +44,14 @@ iNeedHelp.Views['gmap'] = iNeedHelp.Views['basePageView'].extend({
 		// "click .sort-button": "toggleSortable"
 	},
 
-	template: _.template($('#gmap-tpl').html())
+	template: _.template($('#gmap-tpl').html()),
 
-	// afterRender: function () {
-	// 	// do smt
-	// }
+	afterRender: function () {
+		// do smt
+		$("#map_canvas").after($('<span/>', {
+			id: 'gmapTemplate'
+		}));
+	}
 });
 
 iNeedHelp.Views['thankyYouForOffer'] = iNeedHelp.Views['basePageView'].extend({
@@ -66,6 +69,10 @@ iNeedHelp.Views['thankyYouForOffer'] = iNeedHelp.Views['basePageView'].extend({
 
 iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
 
+	initialize: function () {
+		this.setElement($('#content'));
+	},
+
 	events: {
 		"click #askHelp": "askForHelp"
 		// "click .sort-button": "toggleSortable"
@@ -77,8 +84,34 @@ iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
 	// 	// do smt
 	// }
 	askForHelp: function () {
-		now.askForHelp($("#askHelpForm").find('input').val());
-		return false;
+
+		var innerCallback = function () {
+			now.askForHelp({
+				message: $("#askHelpMessage").val(),
+				lat: iNeedHelp.settings.ownPosition.latitude,
+				lng: iNeedHelp.settings.ownPosition.longitude
+			});
+		};
+
+		if (iNeedHelp.settings.ownPositionFound === undefined) {
+			var globalGmap = $('#map_canvas').gmap({'center': '57.7973333,12.0502107', 'disableDefaultUI':true, 'callback': function() {
+				var self = this;
+				self.getCurrentPosition(function(position, status) {
+
+					iNeedHelp.settings.ownPosition = position.coords;
+
+					if ( status === 'OK' ) {
+
+						self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+						// self.addMarker({'position': '57.7973333,12.0502107', 'bounds': true});
+						iNeedHelp.settings.ownPositionFound = true;
+						innerCallback();
+					}
+				});
+			}});
+		} else {
+			innerCallback();
+		}
 	}
 });
 

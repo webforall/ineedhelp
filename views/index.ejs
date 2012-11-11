@@ -75,19 +75,19 @@
 
           <!-- Example row of columns -->
           <div class="row">
+
             <div class="span6">
+              <h2>ASK FOR HELP!</h2>
+              <p>Give someone your help. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn btn-primary btn-large" href="javascript:;" onclick="iNeedHelp.router.navigate('#askHelp', {trigger: true})">ASK &raquo;</a></p>
+           </div>
 
-
+            <div class="span6">
               <h2>Watch!</h2>
               <p>Ask for help. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
               </p>
-              <p><a class="btn" href="javascript:;" onclick="iNeedHelp.router.navigate('#gmap', {trigger: true})">Watch &raquo;</a></p>
+              <p><a class="btn btn-primary btn-large" href="javascript:;" onclick="iNeedHelp.router.navigate('#gmap', {trigger: true})">Watch &raquo;</a></p>
             </div>
-            <div class="span6">
-              <h2>GIVE!</h2>
-              <p>Give someone your help. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="javascript:;" onclick="iNeedHelp.router.navigate('#askHelp', {trigger: true})">GIVE &raquo;</a></p>
-           </div>
           </div>
 
           <hr>
@@ -108,19 +108,19 @@
              self.getCurrentPosition(function(position, status) {
                if ( status === 'OK' ) {
                   self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-                  self.addMarker({'position': self.get('clientPosition'), 'bounds': true}).click(function() {
-                     self.openInfoWindow({ 'content': 'YOU!' }, this);
-                   }); 
+                  // self.addMarker({'position': self.get('clientPosition'), 'bounds': true}).click(function() {
+                  //    self.openInfoWindow({ 'content': 'YOU!' }, this);
+                  //  });
                 // self.addMarker({'position': '57.7973333,12.0502107', 'bounds': true});
                }
-             });   
+             });
 
           }});
-            iNeedHelp.views['marker'] = new iNeedHelp.Views['marker'];
-            iNeedHelp.views['marker'].render();
+          iNeedHelp.views['marker'] = new iNeedHelp.Views['marker'];
+          iNeedHelp.views['marker'].render();
          </script>
       </div>
-      
+
     </script>
 
     <script type="text/html" id="thankyYouForOffer-tpl">
@@ -169,13 +169,11 @@
           <!-- Main hero unit for a primary marketing message or call to action -->
           <div class="hero-unit">
             <h1><%= title %>!</h1>
-            <form id="askHelpForm">
-                <input type="text" name="message" />
-                <button id="askHelp">SEND</button>
-            </form>
+            <input id="askHelpMessage" type="text" name="message" />
+            <button id="askHelp">SEND</button>
           </div>
 
-
+          <div style="display:none" id="map_canvas"></div>
 
           <footer>
             <p>&copy; Company 2012</p>
@@ -189,7 +187,7 @@
     </script>
 
     <script type="text/html" id="offerHelp-tpl">
-              
+
     </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -227,26 +225,7 @@
                 console.log('Good to see you, ' + response.name + '.');
                 iNeedHelp.settings.facebookID = response.id;
 
-                // once facebook connect has been checked, user can send msg
-                // TODO: move me
-                now.ready(function(){
-                    now.facebookID = response.id;
-                    now.name = response.name;
-
-                    now.receiveMessage = function (message) {
-                        alert(message);
-                    };
-
-                    now.feedback = function (info) {
-                        $(".hero-unit").append($('<p/>',{
-                            html: info.name + ' is asking for help: ' + info.message
-                        }));
-                    };
-
-                    now.askingForHelp = function () {
-                        //
-                    }
-                });
+                iNeedHelp.setupNow(response);
             });
 
 
