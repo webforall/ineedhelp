@@ -45,23 +45,49 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 var usersIds = {};
 
+// var helpRequests = [];
+
 var everyone = now.initialize(server);
-everyone.now.askForHelp = function () {
+everyone.now.askForHelp = function (message) {
     console.log(this.now.facebookID);
     console.log(this.user.clientId);
+    console.log(message);
 
     usersIds[this.now.facebookID] = this.user.clientId;
 
     // everyone.now.show('Server says: ' + message);
     var newGroup = now.getGroup('asd');
     this.user.facebookID = this.now.facebookID;
+    this.user.message = message;
+    this.user.name = this.now.name;
     newGroup.addUser(this.user.clientId);
+
+    // this.now.feedback(message);
+
+    everyone.now.feedback({
+        id: this.now.facebookID,
+        name: this.now.name,
+        clientId: this.user.clientId,
+        message: message
+    });
+
+    // helpRequests.push({
+    //     id: this.now.facebookID,
+    //     name: this.now.name,
+    //     clientId: this.user.clientId,
+    //     message: message
+    // });
+
+    // user = now.getClient(usersIds[facebookID], function () {
+    //     console.log(this.now);
+
+    //     this.now.receiveMessage('Yay! Someone is gonna help you!');
+    // });
 };
 
 everyone.now.giveHelp = function(facebookID) {
     console.log(facebookID);
     console.log(usersIds[facebookID]);
-    var newGroup = now.getGroup('asd');
     user = now.getClient(usersIds[facebookID], function () {
         console.log(this.now);
 

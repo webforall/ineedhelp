@@ -67,6 +67,7 @@ iNeedHelp.Views['thankyYouForOffer'] = iNeedHelp.Views['basePageView'].extend({
 iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
 
 	events: {
+		"click #askHelp": "aksForHelp"
 		// "click .sort-button": "toggleSortable"
 	},
 
@@ -75,6 +76,10 @@ iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
 	// afterRender: function () {
 	// 	// do smt
 	// }
+	aksForHelp: function () {
+		now.askForHelp($("#askHelpForm").find('input').val());
+		return false;
+	}
 });
 
 iNeedHelp.Views['listenForOffer'] = iNeedHelp.Views['basePageView'].extend({

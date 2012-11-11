@@ -169,9 +169,9 @@
           <!-- Main hero unit for a primary marketing message or call to action -->
           <div class="hero-unit">
             <h1><%= title %>!</h1>
-            <form onsubmit="return false;">
+            <form id="askHelpForm">
                 <input type="text" name="message" />
-                <button>SEND</button>
+                <button id="askHelp">SEND</button>
             </form>
           </div>
 
@@ -231,8 +231,20 @@
                 // TODO: move me
                 now.ready(function(){
                     now.facebookID = response.id;
+                    now.name = response.name;
+
                     now.receiveMessage = function (message) {
                         alert(message);
+                    };
+
+                    now.feedback = function (info) {
+                        $(".hero-unit").append($('<p/>',{
+                            html: info.name + ' is asking for help: ' + info.message
+                        }));
+                    };
+
+                    now.askingForHelp = function () {
+                        //
                     }
                 });
             });
