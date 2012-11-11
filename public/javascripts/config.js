@@ -1,0 +1,3 @@
+iNeedHelp.settings.mainViewConfig = {
+
+};
