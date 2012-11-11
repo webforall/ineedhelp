@@ -124,7 +124,7 @@
             </div>
           </div>
         </div>
-        <div class="container">
+        <div class="container" id="content">
 
           <!-- Main hero unit for a primary marketing message or call to action -->
           <div class="hero-unit">
@@ -161,7 +161,27 @@
     </script>
 
     <script type="text/html" id="gmap-tpl">
-              
+      <div class="container" > <!-- https://code.google.com/p/jquery-ui-map/ -->
+        <div id="map_canvas"  style="width:1170px;height:500px" ></div>
+        <script type="text/javascript">
+         var globalGmap = $('#map_canvas').gmap({'center': '57.7973333,12.0502107', 'disableDefaultUI':true, 'callback': function() {
+            var self = this;
+             self.getCurrentPosition(function(position, status) {
+               if ( status === 'OK' ) {
+                  self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                  self.addMarker({'position': self.get('clientPosition'), 'bounds': true}).click(function() {
+                     self.openInfoWindow({ 'content': 'YOU!' }, this);
+                   }); 
+                // self.addMarker({'position': '57.7973333,12.0502107', 'bounds': true});
+               }
+             });   
+
+          }});
+            iNeedHelp.views['marker'] = new iNeedHelp.Views['marker'];
+            iNeedHelp.views['marker'].render();
+         </script>
+      </div>
+      
     </script>
 
     <script type="text/html" id="thankyYouForOffer-tpl">
