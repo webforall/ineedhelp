@@ -164,20 +164,24 @@
       <div class="container" > <!-- https://code.google.com/p/jquery-ui-map/ -->
         <div id="map_canvas"  style="width:1170px;height:500px" ></div>
         <script type="text/javascript">
-         $('#map_canvas').gmap({'center': '57.7973333,12.0502107', 'disableDefaultUI':true, 'callback': function() {
+         var globalGmap = $('#map_canvas').gmap({'center': '57.7973333,12.0502107', 'disableDefaultUI':true, 'callback': function() {
             var self = this;
-            self.getCurrentPosition(function(position, status) {
-              if ( status === 'OK' ) {
-                 self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-                self.addMarker({'position': self.get('clientPosition'), 'bounds': true}).click(function() {
-                  self.openInfoWindow({ 'content': 'Hello World!' }, this);
-                }); 
-                self.addMarker({'position': '57.7973333,12.0502107', 'bounds': true});
-              }
-            });   
+             self.getCurrentPosition(function(position, status) {
+               if ( status === 'OK' ) {
+                  self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                  self.addMarker({'position': self.get('clientPosition'), 'bounds': true}).click(function() {
+                     self.openInfoWindow({ 'content': 'YOU!' }, this);
+                   }); 
+                // self.addMarker({'position': '57.7973333,12.0502107', 'bounds': true});
+               }
+             });   
+
           }});
+            iNeedHelp.views['marker'] = new iNeedHelp.Views['marker'];
+            iNeedHelp.views['marker'].render();
          </script>
       </div>
+      
     </script>
 
     <script type="text/html" id="thankyYouForOffer-tpl">

@@ -89,3 +89,12 @@ iNeedHelp.Views['listenForOffer'] = iNeedHelp.Views['basePageView'].extend({
 	// 	// do smt
 	// }
 });
+
+iNeedHelp.Views['marker'] = Backbone.View.extend({
+	render: function(){
+		$('#map_canvas').gmap('addMarker', {'position': '57.7973333,12.0502107', 'bounds': true})
+			.click(function() {
+				$('#map_canvas').gmap('openInfoWindow', {'content': 'Hello World! <a href="/offerHelp">click</a>'}, this);
+			});
+		}
+});
