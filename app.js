@@ -7,7 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , now = require('now');
 
 var app = express();
 
@@ -38,6 +39,32 @@ app.get('/offerHelp', routes.index);
 app.get('/channel', routes.channel);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });
+
+var usersIds = {};
+
+var everyone = now.initialize(server);
+everyone.now.askForHelp = function () {
+    console.log(this.now.facebookID);
+    console.log(this.user.clientId);
+
+    usersIds[this.now.facebookID] = this.user.clientId;
+
+    // everyone.now.show('Server says: ' + message);
+    var newGroup = now.getGroup('asd');
+    this.user.facebookID = this.now.facebookID;
+    newGroup.addUser(this.user.clientId);
+};
+
+everyone.now.giveHelp = function(facebookID) {
+    console.log(facebookID);
+    console.log(usersIds[facebookID]);
+    var newGroup = now.getGroup('asd');
+    user = now.getClient(usersIds[facebookID], function () {
+        console.log(this.now);
+
+        this.now.receiveMessage('Yay! Someone is gonna help you!');
+    });
+}
