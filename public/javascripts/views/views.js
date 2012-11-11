@@ -16,6 +16,8 @@ iNeedHelp.Views['basePageView'] = Backbone.View.extend({
 		// if (this.afterRender !== undefined) {
 		// 	this.afterRender();
 		// }
+
+		return this;
 	}
 
 });
@@ -29,6 +31,19 @@ iNeedHelp.Views['main'] = iNeedHelp.Views['basePageView'].extend({
 	},
 
 	template: _.template($('#main-tpl').html()),
+
+	// afterRender: function () {
+	// 	// do smt
+	// }
+});
+
+iNeedHelp.Views['gmap'] = iNeedHelp.Views['basePageView'].extend({
+
+	events: {
+		// "click .sort-button": "toggleSortable"
+	},
+
+	template: _.template($('#gmap-tpl').html()),
 
 	// afterRender: function () {
 	// 	// do smt

@@ -20,7 +20,7 @@ textarea {
 
 body {
     font-size: 1em;
-    line-height: 1.4;
+    /*line-height: 1.4;*/
 }
 
 /*
@@ -94,9 +94,12 @@ textarea {
    ========================================================================== */
 
 
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
 
-
-#main {
+#container-fluid {
     padding: 10px;
 }
 
