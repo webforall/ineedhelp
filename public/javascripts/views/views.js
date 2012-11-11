@@ -23,7 +23,6 @@ iNeedHelp.Views['basePageView'] = Backbone.View.extend({
 });
 
 
-
 iNeedHelp.Views['main'] = iNeedHelp.Views['basePageView'].extend({
 
 	events: {
@@ -44,6 +43,45 @@ iNeedHelp.Views['gmap'] = iNeedHelp.Views['basePageView'].extend({
 	},
 
 	template: _.template($('#gmap-tpl').html()),
+
+	// afterRender: function () {
+	// 	// do smt
+	// }
+});
+
+iNeedHelp.Views['thankyYouForOffer'] = iNeedHelp.Views['basePageView'].extend({
+
+	events: {
+		// "click .sort-button": "toggleSortable"
+	},
+
+	template: _.template($('#thankyYouForOffer-tpl').html()),
+
+	// afterRender: function () {
+	// 	// do smt
+	// }
+});
+
+iNeedHelp.Views['askHelp'] = iNeedHelp.Views['basePageView'].extend({
+
+	events: {
+		// "click .sort-button": "toggleSortable"
+	},
+
+	template: _.template($('#askHelp-tpl').html()),
+
+	// afterRender: function () {
+	// 	// do smt
+	// }
+});
+
+iNeedHelp.Views['listenForOffer'] = iNeedHelp.Views['basePageView'].extend({
+
+	events: {
+		// "click .sort-button": "toggleSortable"
+	},
+
+	template: _.template($('#listenForOffer-tpl').html()),
 
 	// afterRender: function () {
 	// 	// do smt
