@@ -19,11 +19,75 @@
 
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div id="main">
+        <div class="mainPreloader"></div>
+    </div>
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+          appId      : '368541193233171', // App ID from the App Dashboard
+          channelUrl : '//localhost:3000/channel', // Channel File for x-domain communication
+          status     : true, // check the login status upon init?
+          cookie     : true, // set sessions cookies to allow your server to access the session?
+          xfbml      : true  // parse XFBML tags on this page?
+        });
+
+        RetrieveFbUserInfo = function (response) {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        };
+
+        FbLogin = function () {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    RetrieveFbUserInfo(response);
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            });
+        };
+
+        // Additional initialization code such as adding Event Listeners goes here
+        FB.getLoginStatus(function(response) {
+            console.log(response.status);
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                RetrieveFbUserInfo(response);
+            } else if (response.status === 'not_authorized') {
+                // the user is logged in to Facebook,
+                // but has not authenticated your app
+                FbLogin();
+            } else {
+                // the user isn't logged in to Facebook.
+                FbLogin();
+            }
+        });
+      };
+
+      // Load the SDK's source Asynchronously
+      (function(d, debug){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document, /*debug*/ false));
+    </script>
 
     <script type="text/html" id="main-tpl">
-      <h1>PAOLO</h1>
+        <h1><%= title %></h1>
+        <p>Welcome to <%= title %></p>
     </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
