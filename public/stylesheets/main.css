@@ -103,15 +103,52 @@ body {
     padding: 10px;
 }
 
+.row .span6 h2 {
+    text-align: center;
+}
 
+.row .span6 p {
+    text-align: justify;
+}
 
+.row .span6 p .btn {
+    margin: auto;
+}
 
+.hero-unit h1 {
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: normal;
+}
 
+#content .hero-unit {
+    margin-top: 40px;
+}
 
+#content .hero-unit p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #555555;
+}
 
+#content .row div.left {
+    text-align: left;
+}
 
+#content .row div.right {
+    text-align: right;
+}
 
+#content .row .span6 a {
+    margin: 0 auto;
+    padding: 40px 60px;
+    font-size: 22px;
+}
 
+#content .row {
+    padding: 60px 0;
+}
 
 
 /* ==========================================================================

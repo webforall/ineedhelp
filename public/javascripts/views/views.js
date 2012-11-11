@@ -27,9 +27,19 @@ iNeedHelp.Views['main'] = iNeedHelp.Views['basePageView'].extend({
 
 	events: {
 		// "click .sort-button": "toggleSortable"
+		"a.btn.ask": "ask",
+		"a.btn.offer": "offer"
 	},
 
-	template: _.template($('#main-tpl').html())
+	template: _.template($('#main-tpl').html()),
+
+	ask: function () {
+		iNeedHelp.router.navigate('#askHelp', {trigger: true});
+	},
+
+	offer: function () {
+		iNeedHelp.router.navigate('#offerHelp', {trigger: true});
+	}
 
 	// afterRender: function () {
 	// 	// do smt

@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </a>
-              <a class="brand" href="#"><%= title %></a>
+              <a class="brand" href="/"><%= title %></a>
               <div class="nav-collapse collapse">
                 <ul class="nav">
                   <li class="active"><a href="#">Home</a></li>
@@ -68,25 +68,29 @@
           <!-- Main hero unit for a primary marketing message or call to action -->
           <div class="hero-unit">
             <h1><%= title %>!</h1>
-            <p>This application was created for you to get help from people around you. Just ask for help and your friend on social
-            networks or just people around you may offer you their hand.</p>
-            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <p>
+              Hi! This is an experimental application built on top of nodejs engine.
+              It is meant to allow people to find a little help from neighbourhood.
+            </p>
           </div>
 
           <!-- Example row of columns -->
           <div class="row">
 
             <div class="span6">
-              <h2>ASK FOR HELP!</h2>
-              <p>Give someone your help. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-primary btn-large" href="javascript:;" onclick="iNeedHelp.router.navigate('#askHelp', {trigger: true})">ASK &raquo;</a></p>
+              <div class="left">
+                <a class="btn btn-primary btn-large btn-success ask" href="javascript:;" onclick="iNeedHelp.router.navigate('#askHelp', {trigger: true})">
+                  ASK FOR HELP
+                </a>
+              </div>
            </div>
 
             <div class="span6">
-              <h2>Watch!</h2>
-              <p>Ask for help. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-              </p>
-              <p><a class="btn btn-primary btn-large" href="javascript:;" onclick="iNeedHelp.router.navigate('#gmap', {trigger: true})">Watch &raquo;</a></p>
+              <div class="right">
+                <a class="btn btn-primary btn-large btn-success offer" href="javascript:;" onclick="iNeedHelp.router.navigate('#gmap', {trigger: true})">
+                  OFFER HELP
+                </a>
+              </div>
             </div>
           </div>
 
