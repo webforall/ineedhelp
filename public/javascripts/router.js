@@ -1,7 +1,7 @@
 iNeedHelp.routing = Backbone.Router.extend({
 	routes: {
 		"": "page",
-		':static' : 'page',
+		'gmap' : 'gmap'
 	},
 
 	page: function (page) {
@@ -16,5 +16,10 @@ iNeedHelp.routing = Backbone.Router.extend({
 		}
 
 		iNeedHelp.views[page].render();
+	},
+
+	gmap: function(){
+		iNeedHelp.views['gmap'] = new iNeedHelp.Views['gmap'];
+		iNeedHelp.views['gmap'].render();
 	}
 });

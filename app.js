@@ -30,6 +30,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/gmap', routes.index);
 app.get('/channel', routes.channel);
 app.get('/users', user.list);
 
